@@ -1,0 +1,15 @@
+FROM openjdk:11.0.13-slim-buster
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+MAINTAINER tv
+
+EXPOSE 8180
+WORKDIR /code
+
+# Copy the application's code
+COPY target/steve.jar /code
+COPY target/libs /code/libs
+
+CMD java -jar steve.jar
+
