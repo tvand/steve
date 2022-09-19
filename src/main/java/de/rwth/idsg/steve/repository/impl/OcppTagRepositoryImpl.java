@@ -1,6 +1,6 @@
 /*
- * SteVe - SteckdosenVerwaltung - https://github.com/RWTH-i5-IDSG/steve
- * Copyright (C) 2013-2022 RWTH Aachen University - Information Systems - Intelligent Distributed Systems Group (IDSG).
+ * SteVe - SteckdosenVerwaltung - https://github.com/steve-community/steve
+ * Copyright (C) 2013-2019 RWTH Aachen University - Information Systems - Intelligent Distributed Systems Group (IDSG).
  * All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -192,7 +192,7 @@ public class OcppTagRepositoryImpl implements OcppTagRepository {
             return ctx.insertInto(OCPP_TAG)
                       .set(OCPP_TAG.ID_TAG, u.getIdTag())
                       .set(OCPP_TAG.PARENT_ID_TAG, u.getParentIdTag())
-                      .set(OCPP_TAG.EXPIRY_DATE, toDateTime(u.getExpiration()))
+                      .set(OCPP_TAG.EXPIRY_DATE, toDateTime(u.getExpiryDate()))
                       .set(OCPP_TAG.MAX_ACTIVE_TRANSACTION_COUNT, u.getMaxActiveTransactionCount())
                       .set(OCPP_TAG.NOTE, u.getNote())
                       .returning(OCPP_TAG.OCPP_TAG_PK)
@@ -213,7 +213,7 @@ public class OcppTagRepositoryImpl implements OcppTagRepository {
         try {
             ctx.update(OCPP_TAG)
                .set(OCPP_TAG.PARENT_ID_TAG, u.getParentIdTag())
-               .set(OCPP_TAG.EXPIRY_DATE, toDateTime(u.getExpiration()))
+               .set(OCPP_TAG.EXPIRY_DATE, toDateTime(u.getExpiryDate()))
                .set(OCPP_TAG.MAX_ACTIVE_TRANSACTION_COUNT, u.getMaxActiveTransactionCount())
                .set(OCPP_TAG.NOTE, u.getNote())
                .where(OCPP_TAG.OCPP_TAG_PK.equal(u.getOcppTagPk()))
@@ -251,8 +251,8 @@ public class OcppTagRepositoryImpl implements OcppTagRepository {
                           .parentOcppTagPk(r.value2())
                           .idTag(r.value3())
                           .parentIdTag(r.value4())
-                          .expiryDateDT(r.value5())
-                          .expiryDate(humanize(r.value5()))
+                          .expiryDate(r.value5())
+                          .expiryDateFormatted(humanize(r.value5()))
                           .inTransaction(r.value6())
                           .blocked(r.value7())
                           .build();

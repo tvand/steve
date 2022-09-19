@@ -1,6 +1,6 @@
 /*
- * SteVe - SteckdosenVerwaltung - https://github.com/RWTH-i5-IDSG/steve
- * Copyright (C) 2013-2022 RWTH Aachen University - Information Systems - Intelligent Distributed Systems Group (IDSG).
+ * SteVe - SteckdosenVerwaltung - https://github.com/steve-community/steve
+ * Copyright (C) 2013-2019 RWTH Aachen University - Information Systems - Intelligent Distributed Systems Group (IDSG).
  * All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,7 @@ package de.rwth.idsg.steve.repository.dto;
 import jooq.steve.db.enums.TransactionStopEventActor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 
@@ -31,14 +32,15 @@ import org.joda.time.DateTime;
  */
 @Getter
 @Builder
+@ToString
 public final class Transaction {
     private final int id, connectorId, chargeBoxPk, ocppTagPk;
-    private final String chargeBoxId, ocppIdTag, startTimestamp, startValue;
-    private final DateTime startTimestampDT;
+    private final String chargeBoxId, ocppIdTag, startTimestampFormatted, startValue;
+    private final DateTime startTimestamp;
 
-    @Nullable private final String stopTimestamp;
+    @Nullable private final String stopTimestampFormatted;
     @Nullable private final String stopValue;
     @Nullable private final String stopReason; // new in OCPP 1.6
-    @Nullable private final DateTime stopTimestampDT;
+    @Nullable private final DateTime stopTimestamp;
     @Nullable private final TransactionStopEventActor stopEventActor;
 }
