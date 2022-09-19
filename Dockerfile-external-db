@@ -1,4 +1,4 @@
-FROM openjdk:11.0.13-slim-buster
+FROM amazoncorretto:11.0.15-alpine3.15
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -10,6 +10,7 @@ WORKDIR /code
 # Copy the application's code
 COPY target/steve.jar /code
 COPY target/libs /code/libs
+COPY src/main/resources/config/prod/main.properties /code/steve.properties
 
-CMD java -jar steve.jar
+CMD java -Dmain.properties=/code/steve.properties -jar steve.jar
 
