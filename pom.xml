@@ -239,7 +239,9 @@
                         <configuration>
                             <files>
                                 <file>src/main/resources/config/${envName}/main.properties</file>
+                                <file>steve.properties</file>
                             </files>
+                            <quiet>true</quiet>
                         </configuration>
                     </execution>
                 </executions>
